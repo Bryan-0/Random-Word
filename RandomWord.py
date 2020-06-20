@@ -47,10 +47,13 @@ class Ui(QtWidgets.QMainWindow):
         fname = QFileDialog.getOpenFileName(self, 'Open file', home_dir)
 
         if fname[0]:
-            f = open(fname[0], 'r')
+            f = open(fname[0], 'r', encoding='UTF-8')
 
             with f:
-                data = f.read()
+                try:
+                     data = f.read()
+                except:
+                    data = f.read()
                 self.input.setText(data)
 
     def savefiles(self):
@@ -58,7 +61,7 @@ class Ui(QtWidgets.QMainWindow):
         fname = QFileDialog.getSaveFileName(self, 'Save file', home_dir, '.txt')
 
         if fname[0]:
-            f = open(fname[0]+'.txt', 'w')
+            f = open(fname[0]+'.txt', 'w', encoding='UTF-8')
 
             with f:
                 f.write(self.input.toPlainText())
